@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bitbucket
+spec:
+  selector:
+    app: bitbucket
+  ports:
+  - name: bitbucket-http
+    port: 7990
+    targetPort: bitbucket-http
+  - name: bitbucket-ssh
+    port: 2222
+    targetPort: bitbucket-ssh
+  type: LoadBalancer
+  # type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  selector:
+    app: postgres
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432
